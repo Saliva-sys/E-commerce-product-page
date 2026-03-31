@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
 :root {
     --color-orange: hsl(26deg 100% 55%);
     --color-pale-orange: hsl(25deg 100% 94%);
@@ -8,6 +10,22 @@
     --color-white: hsl(0deg 0% 100%);
     --color-black: hsl(0deg 0% 0%);
     --color-black-opacity: hsl(0deg 0% 0% / 75%);
+    --color-grey-950: hsl(216deg 12% 8%);
+    --color-blue: hsl(228deg 45% 44%);
+    --color-greyish: hsl(229, 27%, 92%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-white);
 }
 
 /* FOOTER DEFINITION */
@@ -21,3 +39,4 @@
 .attribution-link {
   color: var(--color-blue);
 }
+
