@@ -7,6 +7,7 @@ import Cart from "./assets/icon-cart.svg";
 import Avatar from "./assets/image-avatar.png";
 import Minus from "./assets/icon-minus.svg";
 import Plus from "./assets/icon-plus.svg";
+import Basket from "./assets/icon-delete.svg";
 
 // ==========================================
 // Stav a logika
@@ -16,7 +17,8 @@ const CommerceProduct = () => {
   const [products, setProducts] = useState([]);
   const [productImages, setProductImages] = useState(); //vyber obrazkov z thumbnail
   const [quantity, setQuantity] = useState(0)
-  const [addCart, setAddCart] = useState(false);
+  const [addCart, setAddCart] = useState(false);  
+  const [isCartOpen, setIsCartOpen] = useState(false); // Otvorenie/Zatvorenie okna
 // ==========================================
   
 
@@ -205,7 +207,46 @@ return (
         {/* // ========================================== */}
       </article>
 
-      <section className="cart__container"></section>
+      {/* // ========================================== */}
+      {/* Nastavenie kosika */}
+      <section className="cart__container">
+        <h3 className="cart__container-title">Cart</h3>
+        
+        {/* -------------------------------------------- */}
+        {/* Empty cart */}
+        <div className="empty__cart">
+          <p className="empty__cart-text">Your cart is empty</p>
+        </div>
+        {/* -------------------------------------------- */}
+
+        {/* *********************************************** */}
+        {/* kosik po vybere produktu */}
+        <div className="cart__product">
+          <img src={products[0]?.thumbnail} className="cart__product-image" alt="product thumbnail" />
+
+          <p className="cart__product-name">Fall Limited Edition Sneakers</p>
+
+          <div className="cart__product-price">
+            <p>
+              {products[0]?.price} x {quantity} { (products[0]?.price * quantity).toFixed(2) }
+            </p>
+          </div>
+
+          {/* ______________________________________________ */}
+          {/* Vyprazdnenie kosika */}
+          <img 
+            src={Basket} 
+            alt="Basket" 
+            aria-hidden="true"
+            onClick={() => {
+              setAddCart(false); // skryje pprodukt z kosika
+              setQuantity(0); // Vynuluje počítadlo
+          }}/>
+          {/* ______________________________________________ */}
+        </div>
+        {/* *********************************************** */}
+      </section>      
+      {/* // ========================================== */}
     </div>
     )}
 
