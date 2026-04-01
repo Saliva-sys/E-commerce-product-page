@@ -13,7 +13,6 @@ import Basket from "./assets/icon-delete.svg";
 // Stav a logika
 const CommerceProduct = () => {
   const [menu, setMenu] = useState(false); // vyber "menu"
-  const [cart, setCart] = useState(false); // otvorenie kosika z navigacneho panela
   const [products, setProducts] = useState([]);
   const [productImages, setProductImages] = useState(); //vyber obrazkov z thumbnail
   const [quantity, setQuantity] = useState(0)
@@ -32,6 +31,8 @@ useEffect (() => {
       if (data.length && data[0].image.length > 0) {
         setProductImages(data[0].image[0].picture);
         console.log("Dáta sa načítali:", data);
+        console.log("Surové dáta z JSON:", data[0]); // Tu uvidíš presné názvy kľúčov
+  setProducts(data);
 
         // prednacitanie obrazkov
         data[0].image.forEach((item) => {
@@ -98,7 +99,7 @@ return (
         <button type="button"
               className="close__button"
               aria-hidden="true"
-              onClick={() => setCart(!cart)}>
+              onClick={() => setIsCartOpen(!isCartOpen)}>
           <img src={Cart} alt="Cart" aria-hidden="true" />
 
           {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
@@ -155,8 +156,8 @@ return (
           </div>
 
           <div className="product__price">
-            <p className="product__price-unit">{products[0]?.Price > 0 ? products[0]?.Price.toFixed(2) : "0.00"}</p>
-            <p className="product__price-discoount">{products[0]?.discount}</p>
+            <p className="product__price-unit">{products[0]?.price > 0 ? products[0]?.price : "0.00"}</p>
+            <p className="product__price-discount">{products[0]?.discount}</p>
             <p className="product__price-original">{products[0]?.originalPrice}</p>
           </div>
         </div>
@@ -196,57 +197,82 @@ return (
           <button
             type="button"
             disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
-            onClick={() => setAddCart(true)}>
+            onClick={() => {
+              setAddCart(true);
+              setIsCartOpen(true);
+            }}>
               <img src={Cart} alt="Cart" aria-hidden="true" /> 
               <span className="add__to-cart">Add to cart</span>
           </button>
           {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-
         </div>
         {/* // ========================================== */}
       </article>
 
-      {/* // ========================================== */}
-      {/* Nastavenie kosika */}
-      <section className="cart__container">
-        <h3 className="cart__container-title">Cart</h3>
-        
-        {/* -------------------------------------------- */}
-        {/* Empty cart */}
-        <div className="empty__cart">
-          <p className="empty__cart-text">Your cart is empty</p>
-        </div>
-        {/* -------------------------------------------- */}
+      {/* ///////////////////////////////////////////// */}
+      {/* Definujeme zobrazenie jednotlivych stavov kosika */}
+      {isCartOpen && (
+        // ==========================================
+        // Nastavenie kosika 
+        <section className="cart__container">
+          <h3 className="cart__container-title">Cart</h3>
 
-        {/* *********************************************** */}
-        {/* kosik po vybere produktu */}
-        <div className="cart__product">
-          <img src={products[0]?.thumbnail} className="cart__product-image" alt="product thumbnail" />
+          <div className="cart__content">
+            {!addCart || quantity ===0 ? (
 
-          <p className="cart__product-name">Fall Limited Edition Sneakers</p>
+              // -------------------------------------------- 
+              // Empty cart
+              <div className="empty__cart">
+                <p className="empty__cart-text">Your cart is empty</p>
+              </div>
+              // -------------------------------------------- 
+            
+      ) : (
+              // ***********************************************
+              // kosik po vybere produktu 
+              <div className="product__list">
+                <div className="product__list-item">
+                  <img 
+                    src={products[0]?.thumbnail} 
+                    className="cart__product-image" 
+                    alt="product thumbnail" />
 
-          <div className="cart__product-price">
-            <p>
-              {products[0]?.price} x {quantity} { (products[0]?.price * quantity).toFixed(2) }
-            </p>
-          </div>
+                  <div className="product__list-info">
+                    <p className="cart__product-name">{products[0]?.name}</p>
+                  
 
-          {/* ______________________________________________ */}
-          {/* Vyprazdnenie kosika */}
-          <img 
-            src={Basket} 
-            alt="Basket" 
-            aria-hidden="true"
-            onClick={() => {
-              setAddCart(false); // skryje pprodukt z kosika
-              setQuantity(0); // Vynuluje počítadlo
-          }}/>
-          {/* ______________________________________________ */}
-        </div>
-        {/* *********************************************** */}
-      </section>      
-      {/* // ========================================== */}
+                    <div className="cart__product-price">
+                      <p>
+                        {products[0]?.price} x {quantity} { (products[0]?.price * quantity).toFixed(2) }
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ______________________________________________ */}
+                {/* Vyprazdnenie kosika */}
+                <img 
+                  src={Basket} 
+                  className="cart__product-delete"
+                  alt="Basket" 
+                  aria-hidden="true"
+                  onClick={() => {
+                    setAddCart(false); // skryje pprodukt z kosika
+                    setQuantity(0); // Vynuluje počítadlo
+                }}/>
+                {/* ______________________________________________ */}
+
+                <div>
+                  <button type="button">Checkout</button>
+                </div>
+                {/* *********************************************** */}
+              </div>
+              )}
+            </div>                     
+        </section>
+      )}
+      {/* ///////////////////////////////////////////// */}            
     </div>
     )}
 
