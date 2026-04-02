@@ -32,7 +32,7 @@ useEffect (() => {
         setProductImages(data[0].image[0].picture);
         console.log("Dáta sa načítali:", data);
         console.log("Surové dáta z JSON:", data[0]); // Tu uvidíš presné názvy kľúčov
-  setProducts(data);
+        setProducts(data);
 
         // prednacitanie obrazkov
         data[0].image.forEach((item) => {
@@ -59,61 +59,70 @@ return (
       {/* navigacny panel */}      
       <header className="navigation__panel"> 
 
-        {/* // ---------------------------------------- */}
-        {/* nastavenie vyskakovacieho menu */}
-        <button 
-          type="button"
-          className="menu__button"
-          aria-hidden="true"
-          onClick={() => 
-            setMenu(true)
-          }>
-          <img src={Menu} alt="Menu" aria-hidden="true" />
-        </button>    
+        <div className="navigation__panel-logo">
+          {/* // ---------------------------------------- */}
+          {/* nastavenie vyskakovacieho menu */}
+          <button 
+            type="button"
+            className="menu__button"
+            aria-hidden="true"
+            onClick={() => 
+              setMenu(true)
+            }>
+            <img src={Menu} className="menu__button-img" alt="Menu" aria-hidden="true" />
+          </button>    
 
-        {/* Ak je premenná menu pravdivá (true), vykresli to, čo je v zátvorke. Ak je false, v prehliadači sa nevykreslí vôbec nič */}
-        {menu &&  
-          <nav className="menu__list">
-            <button
-              type="button"
-              className="close__button"
-              aria-hidden="true"
-              onClick={() => setMenu(false)}>
-                <img src={Close} alt="close" aria-hidden="true" />
-            </button>
-            <ul>
-              <li>Collections</li>
-              <li>Men</li>
-              <li>Women</li>
-              <li>About</li>
-              <li>Contact</li>
-            </ul>
+          
+          <img src={Logo} className="menu_list-logo" alt="Logo" aria-hidden="true" />
+            
+          <nav className={`menu__list ${menu ? 'open' : ''}`}>
+            <div className="menu__list-content">
+              <button
+                type="button"
+                className="close__button"
+                aria-hidden="true"
+                onClick={() => setMenu(false)}>
+                  <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
+              </button>
+              <ul className="menu__list-items">
+                <li className="menu__lnk"><a href="" className="menu__link">Collections</a></li>
+                <li className="menu__lnk"><a href="" className="menu__link">Men</a></li>
+                <li className="menu__lnk"><a href="" className="menu__link">Women</a></li>
+                <li className="menu__lnk"><a href="" className="menu__link">About</a></li>
+                <li className="menu__lnk"><a href="" className="menu__link">Contact</a></li>
+              </ul>
+            </div>
           </nav>
-        }
-        {/* // ------------------------------------------ */}
+          
+          {/* // ------------------------------------------ */}
 
-        <img src={Logo} alt="Logo" aria-hidden="true" />
+          
+        </div>
 
-        {/* // _________________________________________ */}
-        {/* vstup do kosika cez ikonku */}
-        <button type="button"
-              className="close__button"
-              aria-hidden="true"
-              onClick={() => setIsCartOpen(!isCartOpen)}>
-          <img src={Cart} alt="Cart" aria-hidden="true" />
+        <div className="navigation__panel-cart">
+          {/* // _________________________________________ */}
+          {/* vstup do kosika cez ikonku */}
+          <button type="button"
+                className="cart__button"
+                aria-hidden="true"
+                onClick={() => setIsCartOpen(!isCartOpen)}>
+            <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
 
-          {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
-          {addCart && quantity > 0 && ( 
-            <span className="cart__quantity-badge">{quantity}</span>
-          )}
-        </button>
-        {/* // __________________________________________ */}
+            {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
+            {addCart && quantity > 0 && ( 
+              <span className="cart__quantity-badge">{quantity}</span>
+            )}
+          </button>
+          {/* // __________________________________________ */}
 
-        <button type="button" aria-hidden="true">
-          <img src={Avatar} alt="Avatar" aria-hidden="true" />
-        </button>        
+          <button className="avatar__button" type="button" aria-hidden="true">
+            <img src={Avatar} className="avatar__button-img" alt="Avatar" aria-hidden="true" />
+          </button>   
+        </div>     
       </header>
       {/* // =============================================== */}
+
+      <hr className="separator" />
 
       <article className="product__container">
 
@@ -124,7 +133,7 @@ return (
           {/* // ----------------------------------------- */}
           {/* hlavny obrazok */}
           <div className="main__image">
-            <img src={productImages} alt="Main product" />
+            <img src={productImages} className="main__image-img" alt="Main product" />
           </div>
           {/* // ------------------------------------------ */}
 
@@ -170,10 +179,11 @@ return (
           {/* Tlačidlo pre zníženie množstva */}
           <button
             type="button"
+            className="decrement__button"
             aria-hidden="true"
             onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}>
               {/*onClick funkcia: prev je aktuálna hodnota (previous state). Používame podmienku: Ak je prev viac ako 0, odpočítaj 1. Ak už je 0, nechaj tam 0, vďaka tomu nepôjde do mínusu). */}
-            <img src={Minus} alt="" aria-hidden="true" />
+            <img src={Minus} className="decrement__button-img" alt="" aria-hidden="true" />
           </button>
           {/* // ________________________________________ */}
 
@@ -186,9 +196,10 @@ return (
           {/* Tlačidlo pre zvysenie množstva */}
           <button
             type="button"
+            className="increment__button"
             aria-hidden="true"
             onClick={() => setQuantity(prev => prev + 1)}>
-            <img src={Plus} alt="" aria-hidden="true" />
+            <img src={Plus} className="increment__button-img" alt="" aria-hidden="true" />
           </button>
           {/* // ---------------------------------------- */}
 
@@ -196,12 +207,13 @@ return (
           {/* Tlačidlo na pridanie do košíka */}
           <button
             type="button"
+            className="add__button"
             disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
             onClick={() => {
               setAddCart(true);
               setIsCartOpen(true);
             }}>
-              <img src={Cart} alt="Cart" aria-hidden="true" /> 
+              <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
               <span className="add__to-cart">Add to cart</span>
           </button>
           {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
@@ -244,7 +256,10 @@ return (
 
                     <div className="cart__product-price">
                       <p>
-                        {products[0]?.price} x {quantity} { (products[0]?.price * quantity).toFixed(2) }
+                        <span className="cart__product-price-unit">{products[0]?.price}</span> 
+                        <span className="cart__product-price-multiple">x</span> 
+                        <span className="cart__product-price-quantity">{quantity}</span> 
+                        <span className="cart__product-price-total">{ (products[0]?.price * quantity).toFixed(2) }</span>
                       </p>
                     </div>
                   </div>
@@ -264,7 +279,7 @@ return (
                 {/* ______________________________________________ */}
 
                 <div>
-                  <button type="button">Checkout</button>
+                  <button className="checkout__button" type="button">Checkout</button>
                 </div>
                 {/* *********************************************** */}
               </div>
