@@ -155,7 +155,7 @@ return (
           {/* // ========================================== */}
           {/* informacie o produkte a cena */}
           <div className="product__info-container">
-            <div className="product__info">
+            <div className="product__information">
               <p className="product__info-company">{products[0]?.company}</p>
               <h1 className="product__info-name">{products[0]?.name}</h1>
               <p className="product__info-description">{products[0]?.description}</p>
