@@ -74,30 +74,26 @@ return (
 
           
           <img src={Logo} className="menu_list-logo" alt="Logo" aria-hidden="true" />
-            
-          <nav className={`menu__list ${menu ? 'open' : ''}`}>
-            <div className="menu__list-content">
-              <button
-                type="button"
-                className="close__button"
-                aria-hidden="true"
-                onClick={() => setMenu(false)}>
-                  <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
-              </button>
-              <ul className="menu__list-items">
-                <li className="menu__lnk"><a href="" className="menu__link">Collections</a></li>
-                <li className="menu__lnk"><a href="" className="menu__link">Men</a></li>
-                <li className="menu__lnk"><a href="" className="menu__link">Women</a></li>
-                <li className="menu__lnk"><a href="" className="menu__link">About</a></li>
-                <li className="menu__lnk"><a href="" className="menu__link">Contact</a></li>
-              </ul>
-            </div>
-          </nav>
-          
-          {/* // ------------------------------------------ */}
-
-          
         </div>
+        <nav className={`menu__list ${menu ? 'open' : ''}`}>
+          <div className="menu__list-content">
+            <button
+              type="button"
+              className="close__button"
+              aria-hidden="true"
+              onClick={() => setMenu(false)}>
+                <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
+            </button>
+            <ul className="menu__list-items">
+              <li className="menu__lnk"><a href="" className="menu__link">Collections</a></li>
+              <li className="menu__lnk"><a href="" className="menu__link">Men</a></li>
+              <li className="menu__lnk"><a href="" className="menu__link">Women</a></li>
+              <li className="menu__lnk"><a href="" className="menu__link">About</a></li>
+              <li className="menu__lnk"><a href="" className="menu__link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>          
+        {/* // ------------------------------------------ */}
 
         <div className="navigation__panel-cart">
           {/* // _________________________________________ */}
@@ -122,8 +118,6 @@ return (
       </header>
       {/* // =============================================== */}
 
-      <hr className="separator" />
-
       <article className="product__container">
 
         {/* // ========================================== */}
@@ -137,89 +131,92 @@ return (
           </div>
           {/* // ------------------------------------------ */}
 
-          {/* // __________________________________________ */}
-          {/* thumbnails obrazky pod hlavnym obrazkom */}
-          {products[0]?.image.map((item, index) => (
-            <div
-              key={index}
-              className="thumbnail__image">
+          <div className="thumbnails__container">
+            {/* // __________________________________________ */}
+            {/* thumbnails obrazky pod hlavnym obrazkom */}
+            {products[0]?.image.map((item, index) => (
+              <div
+                key={index}
+                className="thumbnail__image">
 
-              <img
-                src={item.thumbnail}
-                alt={item.name}
-                className={productImages === item.picture ? "thumbnail--active" : "thummbnail"}
-                onClick={() => setProductImages(item.picture)}/>
-            </div>
+                <img
+                  src={item.thumbnail}
+                  alt={item.name}
+                  className={productImages === item.picture ? "thumbnail--active" : "thummbnail"}
+                  onClick={() => setProductImages(item.picture)}/>
+              </div>
             ))}
-          {/* // ________________________________________ */}
-        </div>
-        {/* // ========================================== */}
-
-        {/* // ========================================== */}
-        {/* informacie o produkte a cena */}
-        <div className="product__info-container">
-          <div className="product__info">
-            <p className="product__info-company">{products[0]?.company}</p>
-            <h1 className="product__info-name">{products[0]?.name}</h1>
-            <p className="product__info-description">{products[0]?.description}</p>
-          </div>
-
-          <div className="product__price">
-            <p className="product__price-unit">{products[0]?.price > 0 ? products[0]?.price : "0.00"}</p>
-            <p className="product__price-discount">{products[0]?.discount}</p>
-            <p className="product__price-original">{products[0]?.originalPrice}</p>
+            {/* // ________________________________________ */}
           </div>
         </div>
         {/* // ========================================== */}
 
-        {/* // ========================================== */}
-        {/* +/- pre pridanie a odoberanie z kosika */}
-        <div className="quantity__control">
-          {/* // ________________________________________ */}
-          {/* Tlačidlo pre zníženie množstva */}
-          <button
-            type="button"
-            className="decrement__button"
-            aria-hidden="true"
-            onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}>
-              {/*onClick funkcia: prev je aktuálna hodnota (previous state). Používame podmienku: Ak je prev viac ako 0, odpočítaj 1. Ak už je 0, nechaj tam 0, vďaka tomu nepôjde do mínusu). */}
-            <img src={Minus} className="decrement__button-img" alt="" aria-hidden="true" />
-          </button>
-          {/* // ________________________________________ */}
+        <div className="product__info">
+          {/* // ========================================== */}
+          {/* informacie o produkte a cena */}
+          <div className="product__info-container">
+            <div className="product__info">
+              <p className="product__info-company">{products[0]?.company}</p>
+              <h1 className="product__info-name">{products[0]?.name}</h1>
+              <p className="product__info-description">{products[0]?.description}</p>
+            </div>
 
-          {/* ############################################ */}
-          {/* Dynamické zobrazenie aktuálneho čísla zo stavu 'quantity' */}
-          <span className="quantity">{quantity}</span>
-          {/* ############################################ */}
+            <div className="product__price">
+              <p className="product__price-unit">{products[0]?.price > 0 ? products[0]?.price : "0.00"}</p>
+              <p className="product__price-discount">{products[0]?.discount}</p>
+              <p className="product__price-original">{products[0]?.originalPrice}</p>
+            </div>
+          </div>
+          {/* // ========================================== */}
 
-          {/* // ---------------------------------------- */}
-          {/* Tlačidlo pre zvysenie množstva */}
-          <button
-            type="button"
-            className="increment__button"
-            aria-hidden="true"
-            onClick={() => setQuantity(prev => prev + 1)}>
-            <img src={Plus} className="increment__button-img" alt="" aria-hidden="true" />
-          </button>
-          {/* // ---------------------------------------- */}
+          {/* // ========================================== */}
+          {/* +/- pre pridanie a odoberanie z kosika */}
+          <div className="quantity__control">
+            {/* // ________________________________________ */}
+            {/* Tlačidlo pre zníženie množstva */}
+            <button
+              type="button"
+              className="decrement__button"
+              aria-hidden="true"
+              onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}>
+                {/*onClick funkcia: prev je aktuálna hodnota (previous state). Používame podmienku: Ak je prev viac ako 0, odpočítaj 1. Ak už je 0, nechaj tam 0, vďaka tomu nepôjde do mínusu). */}
+              <img src={Minus} className="decrement__button-img" alt="" aria-hidden="true" />
+            </button>
+            {/* // ________________________________________ */}
 
-          {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
-          {/* Tlačidlo na pridanie do košíka */}
-          <button
-            type="button"
-            className="add__button"
-            disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
-            onClick={() => {
-              setAddCart(true);
-              setIsCartOpen(true);
-            }}>
-              <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
-              <span className="add__to-cart">Add to cart</span>
-          </button>
-          {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+            {/* ############################################ */}
+            {/* Dynamické zobrazenie aktuálneho čísla zo stavu 'quantity' */}
+            <span className="quantity">{quantity}</span>
+            {/* ############################################ */}
 
+            {/* // ---------------------------------------- */}
+            {/* Tlačidlo pre zvysenie množstva */}
+            <button
+              type="button"
+              className="increment__button"
+              aria-hidden="true"
+              onClick={() => setQuantity(prev => prev + 1)}>
+              <img src={Plus} className="increment__button-img" alt="" aria-hidden="true" />
+            </button>
+            {/* // ---------------------------------------- */}
+
+            {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+            {/* Tlačidlo na pridanie do košíka */}
+            <button
+              type="button"
+              className="add__button"
+              disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
+              onClick={() => {
+                setAddCart(true);
+                setIsCartOpen(true);
+              }}>
+                <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
+                <span className="add__to-cart">Add to cart</span>
+            </button>
+            {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+          </div>
+          {/* // ========================================== */}
         </div>
-        {/* // ========================================== */}
       </article>
 
       {/* ///////////////////////////////////////////// */}
