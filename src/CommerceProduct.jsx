@@ -96,20 +96,22 @@ return (
         {/* // ------------------------------------------ */}
 
         <div className="navigation__panel-cart">
-          {/* // _________________________________________ */}
-          {/* vstup do kosika cez ikonku */}
-          <button type="button"
-                className="cart__button"
-                aria-hidden="true"
-                onClick={() => setIsCartOpen(!isCartOpen)}>
-            <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
+          <div className="panel__cart">
+            {/* // _________________________________________ */}
+            {/* vstup do kosika cez ikonku */}
+            <button type="button"
+                  className="cart__button"
+                  aria-hidden="true"
+                  onClick={() => setIsCartOpen(!isCartOpen)}>
+              <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
 
-            {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
-            {addCart && quantity > 0 && ( 
-              <span className="cart__quantity-badge">{quantity}</span>
-            )}
-          </button>
-          {/* // __________________________________________ */}
+              {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
+              {addCart && quantity > 0 && ( 
+                <span className="cart__quantity-badge">{quantity}</span>
+              )}
+            </button>
+            {/* // __________________________________________ */}
+          </div>
 
           <button className="avatar__button" type="button" aria-hidden="true">
             <img src={Avatar} className="avatar__button-img" alt="Avatar" aria-hidden="true" />
@@ -142,7 +144,7 @@ return (
                 <img
                   src={item.thumbnail}
                   alt={item.name}
-                  className={productImages === item.picture ? "thumbnail--active" : "thummbnail"}
+                  className={productImages === item.picture ? "thumbnail--active" : "thumbnail"}
                   onClick={() => setProductImages(item.picture)}/>
               </div>
             ))}
@@ -164,58 +166,64 @@ return (
             <div className="product__price">
               <p className="product__price-unit">{products[0]?.price > 0 ? products[0]?.price : "0.00"}</p>
               <p className="product__price-discount">{products[0]?.discount}</p>
-              <p className="product__price-original">{products[0]?.originalPrice}</p>
+              <div className="product__price-original">
+                <p className="product__price-orig">{products[0]?.originalPrice}</p>
+              </div>
             </div>
           </div>
           {/* // ========================================== */}
 
-          {/* // ========================================== */}
-          {/* +/- pre pridanie a odoberanie z kosika */}
-          <div className="quantity__control">
-            {/* // ________________________________________ */}
-            {/* Tlačidlo pre zníženie množstva */}
-            <button
-              type="button"
-              className="decrement__button"
-              aria-hidden="true"
-              onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}>
-                {/*onClick funkcia: prev je aktuálna hodnota (previous state). Používame podmienku: Ak je prev viac ako 0, odpočítaj 1. Ak už je 0, nechaj tam 0, vďaka tomu nepôjde do mínusu). */}
-              <img src={Minus} className="decrement__button-img" alt="" aria-hidden="true" />
-            </button>
-            {/* // ________________________________________ */}
+          <div className="controls__container">
+            {/* // ========================================== */}
+            {/* +/- pre pridanie a odoberanie z kosika */}
+            <div className="quantity__control">
+              {/* // ________________________________________ */}
+              {/* Tlačidlo pre zníženie množstva */}
+              <button
+                type="button"
+                className="decrement__button"
+                aria-hidden="true"
+                onClick={() => setQuantity(prev => prev > 0 ? prev - 1 : 0)}>
+                  {/*onClick funkcia: prev je aktuálna hodnota (previous state). Používame podmienku: Ak je prev viac ako 0, odpočítaj 1. Ak už je 0, nechaj tam 0, vďaka tomu nepôjde do mínusu). */}
+                <img src={Minus} className="decrement__button-img" alt="" aria-hidden="true" />
+              </button>
+              {/* // ________________________________________ */}
 
-            {/* ############################################ */}
-            {/* Dynamické zobrazenie aktuálneho čísla zo stavu 'quantity' */}
-            <span className="quantity">{quantity}</span>
-            {/* ############################################ */}
+              {/* ############################################ */}
+              {/* Dynamické zobrazenie aktuálneho čísla zo stavu 'quantity' */}
+              <span className="quantity">{quantity}</span>
+              {/* ############################################ */}
 
-            {/* // ---------------------------------------- */}
-            {/* Tlačidlo pre zvysenie množstva */}
-            <button
-              type="button"
-              className="increment__button"
-              aria-hidden="true"
-              onClick={() => setQuantity(prev => prev + 1)}>
-              <img src={Plus} className="increment__button-img" alt="" aria-hidden="true" />
-            </button>
-            {/* // ---------------------------------------- */}
+              {/* // ---------------------------------------- */}
+              {/* Tlačidlo pre zvysenie množstva */}
+              <button
+                type="button"
+                className="increment__button"
+                aria-hidden="true"
+                onClick={() => setQuantity(prev => prev + 1)}>
+                <img src={Plus} className="increment__button-img" alt="" aria-hidden="true" />
+              </button>
+              {/* // ---------------------------------------- */}            
+            </div>
+            {/* // ========================================== */}
 
             {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
             {/* Tlačidlo na pridanie do košíka */}
-            <button
-              type="button"
-              className="add__button"
-              disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
-              onClick={() => {
-                setAddCart(true);
-                setIsCartOpen(true);
-              }}>
-                <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
-                <span className="add__to-cart">Add to cart</span>
-            </button>
-            {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+            <div className="add__button-container">
+              <button
+                type="button"
+                className="add__button"
+                disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
+                onClick={() => {
+                  setAddCart(true);
+                  setIsCartOpen(true);
+                }}>
+                  <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
+                  <span className="add__to-cart">Add to cart</span>
+              </button>
+            </div>
+              {/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
           </div>
-          {/* // ========================================== */}
         </div>
       </article>
 
@@ -223,65 +231,69 @@ return (
       {/* Definujeme zobrazenie jednotlivych stavov kosika */}
       {isCartOpen && (
         // ==========================================
-        // Nastavenie kosika 
+        // Nastavenie kosika         
         <section className="cart__container">
-          <h3 className="cart__container-title">Cart</h3>
+          <div className="cart__shadow-layer"></div>
 
-          <div className="cart__content">
-            {!addCart || quantity ===0 ? (
+          <div className="cart__content-layer">
+            <h3 className="cart__container-title">Cart</h3>
 
-              // -------------------------------------------- 
-              // Empty cart
-              <div className="empty__cart">
-                <p className="empty__cart-text">Your cart is empty</p>
-              </div>
-              // -------------------------------------------- 
-            
-      ) : (
-              // ***********************************************
-              // kosik po vybere produktu 
-              <div className="product__list">
-                <div className="product__list-item">
-                  <img 
-                    src={products[0]?.thumbnail} 
-                    className="cart__product-image" 
-                    alt="product thumbnail" />
+            <div className="cart__content">
+              {!addCart || quantity ===0 ? (
 
-                  <div className="product__list-info">
-                    <p className="cart__product-name">{products[0]?.name}</p>
-                  
+                // -------------------------------------------- 
+                // Empty cart
+                <div className="empty__cart">
+                  <p className="empty__cart-text">Your cart is empty.</p>
+                </div>
+                // -------------------------------------------- 
+              
+        ) : (
+                // ***********************************************
+                // kosik po vybere produktu 
+                <div className="product__list">
+                  <div className="product__list-item">
+                    <img 
+                      src={products[0]?.thumbnail} 
+                      className="cart__product-image" 
+                      alt="product thumbnail" />
 
-                    <div className="cart__product-price">
-                      <p>
-                        <span className="cart__product-price-unit">{products[0]?.price}</span> 
-                        <span className="cart__product-price-multiple">x</span> 
-                        <span className="cart__product-price-quantity">{quantity}</span> 
-                        <span className="cart__product-price-total">{ (products[0]?.price * quantity).toFixed(2) }</span>
-                      </p>
+                    <div className="product__list-info">
+                      <p className="cart__product-name">{products[0]?.name}</p>
+                    
+
+                      <div className="cart__product-price">
+                        <p>
+                          <span className="cart__product-price-unit">{products[0]?.price}</span> 
+                          <span className="cart__product-price-multiple">x</span> 
+                          <span className="cart__product-price-quantity">{quantity}</span> 
+                          <span className="cart__product-price-total">{ (products[0]?.price * quantity).toFixed(2) }</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* ______________________________________________ */}
-                {/* Vyprazdnenie kosika */}
-                <img 
-                  src={Basket} 
-                  className="cart__product-delete"
-                  alt="Basket" 
-                  aria-hidden="true"
-                  onClick={() => {
-                    setAddCart(false); // skryje pprodukt z kosika
-                    setQuantity(0); // Vynuluje počítadlo
-                }}/>
-                {/* ______________________________________________ */}
+                  {/* ______________________________________________ */}
+                  {/* Vyprazdnenie kosika */}
+                  <img 
+                    src={Basket} 
+                    className="cart__product-delete"
+                    alt="Basket" 
+                    aria-hidden="true"
+                    onClick={() => {
+                      setAddCart(false); // skryje pprodukt z kosika
+                      setQuantity(0); // Vynuluje počítadlo
+                  }}/>
+                  {/* ______________________________________________ */}
 
-                <div>
-                  <button className="checkout__button" type="button">Checkout</button>
+                  <div>
+                    <button className="checkout__button" type="button">Checkout</button>
+                  </div>
+                  {/* *********************************************** */}
                 </div>
-                {/* *********************************************** */}
-              </div>
               )}
-            </div>                     
+            </div>     
+          </div>                
         </section>
       )}
       {/* ///////////////////////////////////////////// */}            
