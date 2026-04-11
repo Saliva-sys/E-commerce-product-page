@@ -8,6 +8,8 @@ import Avatar from "./assets/image-avatar.png";
 import Minus from "./assets/icon-minus.svg";
 import Plus from "./assets/icon-plus.svg";
 import Basket from "./assets/icon-delete.svg";
+import Prev from "./assets/icon-previous.svg";
+import Next from "./assets/icon-next.svg";
 
 // ==========================================
 // Stav a logika
@@ -18,6 +20,22 @@ const CommerceProduct = () => {
   const [quantity, setQuantity] = useState(0)
   const [addCart, setAddCart] = useState(false);  
   const [isCartOpen, setIsCartOpen] = useState(false); // Otvorenie/Zatvorenie okna
+  const [cartQuantity, setCartQuantity] = useState(0); // Toto bude číslo na ikonke
+  const [lightBox, setLightBox] = useState(false); // nastavenie nahladoveho okna
+
+const handleNext = () => {
+  // Nájdeme index aktuálneho obrázka v poli
+  const currentIndex = products[0].image.findIndex(item => item.picture === productImages);
+  // Ak sme na konci, skočíme na začiatok (0), inak ideme o jeden ďalej
+  const nextIndex = (currentIndex + 1) % products[0].image.length;
+  setProductImages(products[0].image[nextIndex].picture)
+};
+const handlePrev = () => {
+  const currentIndex = products[0]?.image.findIndex(item => item.picture === productImages);
+  // Ak sme na začiatku, skočíme na koniec, inak o jeden späť
+  const prevIndex = (currentIndex - 1 + products[0]?.image.length) % products[0].image.length;
+  setProductImages(products[0].image[prevIndex].picture);
+};
 // ==========================================
   
 
@@ -106,8 +124,8 @@ return (
               <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
 
               {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
-              {addCart && quantity > 0 && ( 
-                <span className="cart__quantity-badge">{quantity}</span>
+              {addCart && cartQuantity > 0 && ( 
+                <span className="cart__quantity-badge">{cartQuantity}</span>
               )}
             </button>
             {/* // __________________________________________ */}
@@ -128,10 +146,25 @@ return (
 
           {/* // ----------------------------------------- */}
           {/* hlavny obrazok */}
-          <div className="main__image">
+          <div className="main__image"
+            onClick={() => window.innerWidth > 768 && setLightBox(true)}>
             <img src={productImages} className="main__image-img" alt="Main product" />
+
+            <div className="btn__container">
+              <button className="btn__prev"
+                onClick={handlePrev}>
+                <img src={Prev} className="main__image-prev" alt="previous image" />
+              </button>
+
+              <button className="btn__next"
+                onClick={handleNext}>
+                <img src={Next} className="main__image-next" alt="next image" />
+              </button>
+            </div>
           </div>
           {/* // ------------------------------------------ */}
+
+          
 
           <div className="thumbnails__container">
             {/* // __________________________________________ */}
@@ -213,10 +246,11 @@ return (
               <button
                 type="button"
                 className="add__button"
-                disabled={quantity === 0} // Tlačidlo sa nedá stlačiť, ak je množstvo 0
+                disabled={quantity === 0}
                 onClick={() => {
-                  setAddCart(true);
-                  setIsCartOpen(true);
+                setAddCart(true);
+                setCartQuantity(quantity);
+                  // setIsCartOpen(true);
                 }}>
                   <img src={Cart} className="add__button-img" alt="Cart" aria-hidden="true" /> 
                   <span className="add__to-cart">Add to cart</span>
@@ -239,7 +273,7 @@ return (
             <h3 className="cart__container-title">Cart</h3>
 
             <div className="cart__content">
-              {!addCart || quantity ===0 ? (
+              {!addCart || cartQuantity ===0 ? (
 
                 // -------------------------------------------- 
                 // Empty cart
@@ -254,7 +288,7 @@ return (
                 <div className="product__list">
                   <div className="product__list-item">
                     <img 
-                      src={products[0]?.thumbnail} 
+                      src={products[0]?.image[0]?.thumbnail} 
                       className="cart__product-image" 
                       alt="product thumbnail" />
 
@@ -266,26 +300,26 @@ return (
                         <p>
                           <span className="cart__product-price-unit">{products[0]?.price}</span> 
                           <span className="cart__product-price-multiple">x</span> 
-                          <span className="cart__product-price-quantity">{quantity}</span> 
-                          <span className="cart__product-price-total">{ (products[0]?.price * quantity).toFixed(2) }</span>
+                          <span className="cart__product-price-quantity">{cartQuantity}</span> 
+                          <span className="cart__product-price-total">{ (products[0]?.price * cartQuantity).toFixed(2) }</span>
                         </p>
                       </div>
                     </div>
+
+                    {/* ______________________________________________ */}
+                    {/* Vyprazdnenie kosika */}
+                    <img 
+                      src={Basket} 
+                      className="cart__product-delete"
+                      alt="Basket" 
+                      aria-hidden="true"
+                      onClick={() => {
+                        setAddCart(false); // skryje pprodukt z kosika
+                        setQuantity(0); // Vynuluje počítadlo
+                    }}/>
+                    {/* ______________________________________________ */}
                   </div>
-
-                  {/* ______________________________________________ */}
-                  {/* Vyprazdnenie kosika */}
-                  <img 
-                    src={Basket} 
-                    className="cart__product-delete"
-                    alt="Basket" 
-                    aria-hidden="true"
-                    onClick={() => {
-                      setAddCart(false); // skryje pprodukt z kosika
-                      setQuantity(0); // Vynuluje počítadlo
-                  }}/>
-                  {/* ______________________________________________ */}
-
+                  
                   <div>
                     <button className="checkout__button" type="button">Checkout</button>
                   </div>
@@ -299,6 +333,44 @@ return (
       {/* ///////////////////////////////////////////// */}            
     </div>
     )}
+
+    {/* definovanie nahladoveho okna */}
+          {lightBox && (
+  <div className="lightbox__overlay">
+    <div className="lightbox__content">
+      {/* Tlačidlo na zatvorenie */}
+      <button className="lightbox__close" onClick={() => setLightBox(false)}>
+        <img src={Close} className="ligthbox__close-img" alt="Close" aria-hidden="true" />
+      </button>
+
+      <div className="lightbox__main-container">
+        {/* Šípky v Lightboxe */}
+        <button className="btn__prev lightbox-btn" onClick={handlePrev}>
+          <img src={Prev} alt="previous" />
+        </button>
+        
+        <img src={productImages} className="lightbox__main-img" alt="Product" />
+        
+        <button className="btn__next lightbox-btn" onClick={handleNext}>
+          <img src={Next} alt="next" />
+        </button>
+      </div>
+
+      {/* Thumbnails pod hlavným obrázkom v Lightboxe */}
+      <div className="lightbox__thumbnails">
+        {products[0]?.image.map((item, index) => (
+          <div 
+            key={index} 
+            className={`thumbnail__image ${item.picture === productImages ? "thumbnail--active" : ""}`}
+            onClick={() => setProductImages(item.picture)}
+          >
+            <img src={item.picture} alt={`Thumbnail ${index}`} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
     <footer className="attribution">
         Challenge by
