@@ -228,10 +228,18 @@ button {
 }
 
 .main__image-prev, .main__image-next {
-  width: 0.6rem;
-  height: 0.7rem;
+  width: clamp(9.6px, calc(9.037px + 0.15vw), 11.2px);
+  height: clamp(11.2px, calc(8.946px + 0.601vw), 17.6px);
   object-fit: cover;  
 }
+
+.main__image-prev:active {
+    content: url('./assets/icon-previous1.svg');
+  }
+
+  .main__image-next:active {
+    content: url('./assets/icon-next1.svg');
+  }
 
 .lighBox__container {
   display: none;
@@ -483,7 +491,6 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 .cart__product-price {
@@ -535,6 +542,35 @@ button {
   font-weight: 700;
   border-radius: 0.5rem;
   background-color: var(--color-orange);  
+}
+
+.main__container.coming-soon-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-pale-orange);
+}
+
+.main__container-title {
+  font-size: clamp(2rem, 10vw, 5rem); 
+  margin-bottom: 2rem;
+}
+
+.main__container-link {
+    padding-block-start: 2rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--color-very-dark-blue);
+    transition: color 0.3s ease;
+}
+
+.main__container-link:hover {
+    color: var(--color-orange);
 }
 
 /* FOOTER DEFINITION */
@@ -657,7 +693,7 @@ button {
 
   .thumbnail--active {
     outline: 2px solid var(--color-orange);
-    opacity: 0.5;;
+    opacity: 0.5;
   }   
   
   .product__info-company {
@@ -709,75 +745,125 @@ button {
   }
 
   .lightbox__overlay {
-  position: fixed; /* Toto ho vytrhne zo stránky a pripne na obrazovku */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  justify-content: center;
-  z-index: 4; /* Musí byť vyššie ako navigácia a zvyšok webu */
-}
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    background-color: var(--color-black-opacity);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
 
-.lightbox__content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 34.5rem; /* Veľkosť okna na desktope */
-  position: relative;
-}
+  .lightbox__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;  
+  }
 
-.lightbox__main-container {
-  position: relative;
-}
+  .lightbox__close {
+    width: 100%;
+    justify-content: right;
+    padding-block-start: 5.5rem;
+    padding-block-end: 1.35rem;
+  }
 
-.lightbox__main-img {
-  width: 100%;
-  border-radius: 1rem;
-}
+  .ligthbox__close-img {
+    width: 1.4rem;
+    height: 1.45rem;
+  }
 
-/* Štýlovanie šípok v Lightboxe */
-.lightbox-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10000;
-}
+  .ligthbox__close-img:hover {
+    content: url('./assets/icon-close2.svg');
+  }
 
-.btn__prev.lightbox-btn { left: -1.25rem; }
-.btn__next.lightbox-btn { right: -1.25rem; }
+  .main__image-lightbox {
+    display: inline-flex;
+    margin: 0 auto;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* Tlačidlo Close navrchu */
-.lightbox__close {
-  align-self: flex-end;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 1rem 0;
-}
+  .lightbox__main-img {
+    width: 34.4rem;
+    height: 34.4rem;
+    border-radius: 1rem;
+    display: block;
+  }
 
-.lightbox__close svg path {
-  transition: fill 0.3s ease;
-}
+  .lightbox-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%); /* Presné vycentrovanie na stred */
+    background-color: var(--color-white);
+    border-radius: 50%;
+    width: 3.5rem;        
+    height: 3.5rem;
+    z-index: 10;          
+    pointer-events: auto;
+    }
 
-.lightbox__close:hover svg path {
-  fill: var(--color-orange);
-}
+  .main__image-prev, .main__image-next {
+    width: 0.7rem;
+    height: 1.1rem;
+    object-fit: cover;
+    }
 
-/* Thumbnails v modálnom okne */
-.lightbox__thumbnails {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
+  .main__image-prev:hover {
+    content: url('./assets/icon-previous1.svg');
+  }
 
-.lightbox__thumbnails .thumbnail__image img {
-  width: 5rem;
-  border-radius: 0.5rem;
-}
+  .main__image-next:hover {
+    content: url('./assets/icon-next1.svg');
+  }
+  
+  .btn__prev.lightbox-btn { left: -1.75rem; }
+  .btn__next.lightbox-btn { right: -1.75rem; }
+  
+  .lightbox__thumbnails {
+    display: flex;
+    gap: 1.94rem;
+    padding-block-start: 2.5rem;
+    padding-inline-start: 3.3rem;
+    padding-inline-end: 1.35rem;
+  }
 
+  .lightbox__thumbnail-image {
+    position: relative;
+    display: flex;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    width: 5.5rem;  
+    height: 5.55rem;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
 
+  .thumbnail__lightbox:hover {
+    opacity: 0.3;
+  }
+
+  .thumbnail__lightbox--active {
+    opacity: 0.3;
+  }
+
+  .lightbox__thumbnail-image.active-border {
+    outline: 2px solid var(--color-orange);
+  }
+
+  .container-h1 {
+    font-size: 6rem;
+  }
+
+  .container-button {
+    font-size: 3rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

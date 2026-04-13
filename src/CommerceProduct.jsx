@@ -1,6 +1,7 @@
 import "./CommerceProduct.css";
 import  {useState, useEffect} from "react";
 import Close from "./assets/icon-close.svg";
+import CloseLightBox from "./assets/icon-close1.svg";
 import Menu from "./assets/icon-menu.svg";
 import Logo from "./assets/logo.svg";
 import Cart from "./assets/icon-cart.svg";
@@ -49,7 +50,6 @@ useEffect (() => {
       if (data.length && data[0].image.length > 0) {
         setProductImages(data[0].image[0].picture);
         console.log("Dáta sa načítali:", data);
-        console.log("Surové dáta z JSON:", data[0]); // Tu uvidíš presné názvy kľúčov
         setProducts(data);
 
         // prednacitanie obrazkov
@@ -103,11 +103,11 @@ return (
                 <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
             </button>
             <ul className="menu__list-items">
-              <li className="menu__lnk"><a href="" className="menu__link">Collections</a></li>
-              <li className="menu__lnk"><a href="" className="menu__link">Men</a></li>
-              <li className="menu__lnk"><a href="" className="menu__link">Women</a></li>
-              <li className="menu__lnk"><a href="" className="menu__link">About</a></li>
-              <li className="menu__lnk"><a href="" className="menu__link">Contact</a></li>
+              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Collections</a></li>
+              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Men</a></li>
+              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Women</a></li>
+              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">About</a></li>
+              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Contact</a></li>
             </ul>
           </div>
         </nav>          
@@ -185,6 +185,52 @@ return (
           </div>
         </div>
         {/* // ========================================== */}
+
+        {/* definovanie nahladoveho okna */}
+          {lightBox && (
+            <div className="lightbox__overlay"
+              onClick={(e) => 
+                e.target === e.currentTarget && setLightBox(false)}>            
+              <div className="lightbox__content"
+                >
+                {/* Tlačidlo na zatvorenie */}
+                <button className="lightbox__close" onClick={() => setLightBox(false)}>
+                  <img src={CloseLightBox} className="ligthbox__close-img" alt="Close" aria-hidden="true" />
+                </button>
+
+                <div className="main__image-lightbox">
+                    {/* Šípky v Lightboxe */}
+                    <button className="btn__prev lightbox-btn" onClick={handlePrev}>
+                      <img src={Prev} className="main__image-prev" alt="previous" />
+                    </button>
+
+                    <img src={productImages} className="lightbox__main-img" alt="Product" />
+                    
+                    <button className="btn__next lightbox-btn" onClick={handleNext}>
+                      <img src={Next} className="main__image-next" alt="next" />
+                    </button>
+                  
+                </div>
+
+                {/* Thumbnails pod hlavným obrázkom v Lightboxe */}
+                <div className="lightbox__thumbnails">
+                  {products[0]?.image.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`lightbox__thumbnail-image ${productImages === item.picture ? "active-border" : ""}`}>
+
+                    <img
+                      src={item.thumbnail}
+                      alt={item.name}
+                      className={productImages === item.picture ? "thumbnail__lightbox--active" : "thumbnail__lightbox"}
+                      onClick={() => setProductImages(item.picture)}
+                      />
+                  </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
 
         <div className="product__info">
           {/* // ========================================== */}
@@ -333,44 +379,6 @@ return (
       {/* ///////////////////////////////////////////// */}            
     </div>
     )}
-
-    {/* definovanie nahladoveho okna */}
-          {lightBox && (
-  <div className="lightbox__overlay">
-    <div className="lightbox__content">
-      {/* Tlačidlo na zatvorenie */}
-      <button className="lightbox__close" onClick={() => setLightBox(false)}>
-        <img src={Close} className="ligthbox__close-img" alt="Close" aria-hidden="true" />
-      </button>
-
-      <div className="lightbox__main-container">
-        {/* Šípky v Lightboxe */}
-        <button className="btn__prev lightbox-btn" onClick={handlePrev}>
-          <img src={Prev} alt="previous" />
-        </button>
-        
-        <img src={productImages} className="lightbox__main-img" alt="Product" />
-        
-        <button className="btn__next lightbox-btn" onClick={handleNext}>
-          <img src={Next} alt="next" />
-        </button>
-      </div>
-
-      {/* Thumbnails pod hlavným obrázkom v Lightboxe */}
-      <div className="lightbox__thumbnails">
-        {products[0]?.image.map((item, index) => (
-          <div 
-            key={index} 
-            className={`thumbnail__image ${item.picture === productImages ? "thumbnail--active" : ""}`}
-            onClick={() => setProductImages(item.picture)}
-          >
-            <img src={item.picture} alt={`Thumbnail ${index}`} />
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-)}
 
     <footer className="attribution">
         Challenge by
