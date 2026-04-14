@@ -31,8 +31,7 @@ a,
 hr, 
 ul,
 li, 
-img,
-hr {
+img {
   margin: 0;
   padding: 0;
   font-family: inherit;
@@ -152,8 +151,8 @@ button {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -5px;
-  right: -5.5px;
+  top: -0.3125rem;
+  right: -0.34375rem;
 
   font-size: 0.65rem;
   font-weight: 700;
@@ -162,7 +161,7 @@ button {
   background-color: var(--color-orange);
   padding-inline: 0.45rem;
   padding-block: 0rem;
-  border-radius: 10px
+  border-radius: 0.625rem;
 }
 
 .avatar__button-img {
@@ -185,7 +184,7 @@ button {
   margin-inline: clamp(0rem, calc(-3.627rem + 15.474vw), 10.3rem);
   padding-block: clamp(0rem, calc(-1.972rem + 8.413vw), 5.6rem) 0;
   padding-inline: clamp(0rem, calc(-1.056rem + 4.507vw), 3rem) clamp(0rem, calc(-1.039rem + 4.432vw), 2.95rem);
-  min-width: 320px;
+  min-width: 20rem;
   height: auto;
 }
 
@@ -230,8 +229,8 @@ button {
 }
 
 .main__image-prev, .main__image-next {
-  width: clamp(9.6px, calc(9.037px + 0.15vw), 11.2px);
-  height: clamp(11.2px, calc(8.946px + 0.601vw), 17.6px);
+  width: clamp(0.6rem, calc(0.565rem + 0.15vw), 0.7rem);
+  height: clamp(0.7rem, calc(0.559rem + 0.601vw), 1.1rem);
   object-fit: cover;  
 }
 
@@ -421,7 +420,7 @@ button {
   flex-direction: column;
   position: absolute;
   top: clamp(4.75rem, calc(4.398rem + 1.502vw), 5.75rem);
-  left: clamp(0.47rem, calc(-21.181rem + 92.379vw), 61.96rem);
+  left: clamp(0.47rem, calc(-32.956rem + 142.618vw), 95.4rem);
   width: 22.5rem;
   min-height: clamp(16rem, calc(15.613rem + 1.653vw), 17.1rem);
   border-radius: 0.5rem;
@@ -583,7 +582,7 @@ button {
   font-size: clamp(2rem, 10vw, 5rem); 
   font-style: italic;
   font-weight: 700;
-  margin-bottom: 2rem;
+  margin-block-end: 2rem;
 }
 
 .main__container-link {
@@ -779,7 +778,7 @@ button {
     align-items: center;
     justify-content: center;
   }
-
+ 
   .btn__container {
     display: none;
   }

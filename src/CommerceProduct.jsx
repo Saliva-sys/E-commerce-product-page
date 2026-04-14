@@ -84,7 +84,7 @@ return (
           <button 
             type="button"
             className="menu__button"
-            aria-hidden="true"
+            aria-label="Open menu"
             onClick={() => 
               setMenu(true)
             }>
@@ -99,7 +99,7 @@ return (
             <button
               type="button"
               className="close__button"
-              aria-hidden="true"
+              aria-label="Close menu"
               onClick={() => setMenu(false)}>
                 <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
             </button>
@@ -120,7 +120,7 @@ return (
             {/* vstup do kosika cez ikonku */}
             <button type="button"
                   className="cart__button"
-                  aria-hidden="true"
+                  aria-label="View cart"
                   onClick={() => setIsCartOpen(!isCartOpen)}>
               <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
 
@@ -132,7 +132,7 @@ return (
             {/* // __________________________________________ */}
           </div>
 
-          <button className="avatar__button" type="button" aria-hidden="true">
+          <button className="avatar__button" type="button" aria-label="Profile">
             <a href="https://github.com/Saliva-sys" target="blank"><img src={Avatar} className="avatar__button-img" alt="Avatar" aria-hidden="true" /></a>
           </button>   
         </div>     
@@ -177,7 +177,7 @@ return (
 
                 <img
                   src={item.thumbnail}
-                  alt={item.name}
+                  alt={`Thumbnail of ${products[0]?.name}`}
                   className={productImages === item.picture ? "thumbnail--active" : "thumbnail"}
                   onClick={() => setProductImages(item.picture)}/>
               </div>
