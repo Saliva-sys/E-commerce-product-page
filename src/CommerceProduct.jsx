@@ -11,6 +11,7 @@ import Plus from "./assets/icon-plus.svg";
 import Basket from "./assets/icon-delete.svg";
 import Prev from "./assets/icon-previous.svg";
 import Next from "./assets/icon-next.svg";
+import Swal from 'sweetalert2';
 
 // ==========================================
 // Stav a logika
@@ -132,7 +133,7 @@ return (
           </div>
 
           <button className="avatar__button" type="button" aria-hidden="true">
-            <img src={Avatar} className="avatar__button-img" alt="Avatar" aria-hidden="true" />
+            <a href="https://github.com/Saliva-sys" target="blank"><img src={Avatar} className="avatar__button-img" alt="Avatar" aria-hidden="true" /></a>
           </button>   
         </div>     
       </header>
@@ -367,7 +368,24 @@ return (
                   </div>
                   
                   <div>
-                    <button className="checkout__button" type="button">Checkout</button>
+                    <button 
+                      className="checkout__button" 
+                      type="button" 
+                      onClick={() => {
+                        Swal.fire({
+                          title: 'Thank you!',
+                          text: 'Your fictive purchase was successful.',
+                          icon: 'success',
+                          confirmButtonText: 'Great!',
+                          confirmButtonColor: 'var(--color-orange)', 
+                          background: 'var(--color-very-dark-blue)',
+                          color: 'var(--color-light-orange)',
+                          borderRadius: '10px'
+                        });
+                      }}
+                    >
+                      Checkout
+                    </button>
                   </div>
                   {/* *********************************************** */}
                 </div>

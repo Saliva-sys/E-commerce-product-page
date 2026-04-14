@@ -39,7 +39,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Screenshot](./public/Screenshot.png)
 
 ### Links
 
@@ -52,6 +52,7 @@ Users should be able to:
 
 - Semantic HTML5 markup
 - CSS custom properties (Variables)
+- CSS BEM 
 - Flexbox & Responsive design (Clamp function)
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
@@ -113,7 +114,7 @@ I practiced working with JavaScript math functions to calculate the total price 
 </span>
 ```
 
-*5. manage complex visual effects*
+*5. Manage complex visual effects*
 
 I learned how to manage complex visual effects by layering elements. When a single CSS box-shadow wasn't giving me the depth I wanted for the cart overlay, I experimented with a dedicated shadow layer to gain finer control over the elevation and blur. This forced me to think more deeply about which CSS properties were the most effective for the specific layout and why one solution was better than another in a given context.
 
@@ -150,9 +151,11 @@ I learned that for CSS transitions to work, the property specified in the transi
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+In future projects, I want to focus on:
+- **State Management:** Exploring more robust solutions like Redux Toolkit or Context API for larger applications where passing props becomes too complex.
+- **Backend Integration:** Moving from a static `data.json` to a real backend (Node.js/Express) with a database (MongoDB/PostgreSQL) to handle real orders and user accounts.
+- **Automated Testing:** Implementing Unit tests (Jest) and End-to-End tests (Cypress) to ensure the cart logic remains bug-free during updates.
+- **Security Basics:** Learning how to sanitize user inputs and secure API routes to prevent common vulnerabilities like XSS or Injection attacks.
 
 ### Useful resources
 
@@ -168,9 +171,9 @@ This project was created in cooperation with the AI Assistant (Gemini - Free).
 *How do I use it?*
 
 - Architecture and logic: AI helped me design the structure of states (useState) for the basket and switching images in the gallery.
-- Debugging: Together we solved problems with asynchronous data loading data from data.json and treatment of conditions until the data is loaded.
+- Debugging: Together we solved problems with asynchronous data loading data from data.json and handling conditional rendering while data is loading.
 - CSS Layout: Help in tuning more complex media queries and fix positions for cart layers (cart__shadow-layer vs cart__content-layer).
-- Brainstorming: We were looking for the best way to resolve the link between the main image and the views (thumbnails).
+- Brainstorming: We were looking for the best way to manage the relationship between the main image and the views (thumbnails).
 
 *What worked well?*
 
