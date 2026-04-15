@@ -418,12 +418,14 @@ button {
 .cart__container {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: clamp(4.75rem, calc(4.398rem + 1.502vw), 5.75rem);
-  left: clamp(0.47rem, calc(-32.956rem + 142.618vw), 95.4rem);
+  left: 50%;
+  transform: translateX(-50%);
   width: 22.5rem;
   min-height: clamp(16rem, calc(15.613rem + 1.653vw), 17.1rem);
   border-radius: 0.5rem;
+  z-index: 2;;
 }
 
 .cart__shadow-layer {
@@ -727,13 +729,13 @@ button {
   }   
 
   .thumbnail {
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
 
-.thumbnail:hover {
-  opacity: 0.5;
-}
+  .thumbnail:hover {
+    opacity: 0.5;
+  }
   
   .product__info-company {
     letter-spacing: 0.135rem;
@@ -777,6 +779,14 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .cart__container {
+    position: absolute;
+    left: auto;
+    right: -10.66rem;
+    transform: none;
+    top: calc(100% + 1.7rem);
   }
  
   .btn__container {
