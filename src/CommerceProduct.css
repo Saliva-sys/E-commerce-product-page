@@ -11,9 +11,10 @@
     --color-white: hsl(0deg 0% 100%);
     --color-black: hsl(0deg 0% 0%);
     --color-black-opacity: hsl(0deg 0% 0% / 75%);
-    --color-grey-950: rgb(18, 20, 23);
+    --color-grey-950: hsl(216deg 12% 8%);
     --color-blue: hsl(228deg 45% 44%);
     --color-greyish: hsl(229, 27%, 92%);
+    --color-black-strong-opacity: hsla(0deg 0% 0% / 20%);
 }
 
 * {
@@ -434,7 +435,7 @@ button {
   width: 100%;
   min-height: 15rem;
   z-index: 1;
-  box-shadow: -0.5rem 2rem 2rem -0.5rem rgba(0, 0, 0, 0.2), 0.5rem 2rem 2rem -0.5rem rgba(0, 0, 0, 0.2);
+  box-shadow: -0.5rem 2rem 2rem -0.5rem var(--color-black-strong-opacity), 0.5rem 2rem 2rem -0.5rem var(--color-black-strong-opacity);
   background-color: transparent;  
 }
 
