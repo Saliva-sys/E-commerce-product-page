@@ -104,11 +104,11 @@ return (
                 <img src={Close} className="close__button-img" alt="close" aria-hidden="true" />
             </button>
             <ul className="menu__list-items">
-              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Collections</a></li>
-              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Men</a></li>
-              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Women</a></li>
-              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">About</a></li>
-              <li className="menu__lnk"><a href="/E-commerce-product-page/public/coming.html" className="menu__link">Contact</a></li>
+              <li className="menu__lnk"><a href="/coming.html" className="menu__link">Collections</a></li>
+              <li className="menu__lnk"><a href="/coming.html" className="menu__link">Men</a></li>
+              <li className="menu__lnk"><a href="/coming.html" className="menu__link">Women</a></li>
+              <li className="menu__lnk"><a href="/coming.html" className="menu__link">About</a></li>
+              <li className="menu__lnk"><a href="/coming.html" className="menu__link">Contact</a></li>
             </ul>
           </div>
         </nav>          
