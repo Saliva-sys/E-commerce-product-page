@@ -44,7 +44,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [GitHub Repository URL](https://github.com/Saliva-sys/E-commerce-product-page.git)
-- Live Site URL: [Live site URL](https://saliva-sys.github.io/E-commerce-product-page/)
+- Live Site URL: [saliva-e-commerce.netlify.app](https://saliva-e-commerce.netlify.app/)
 
 ## My process
 
