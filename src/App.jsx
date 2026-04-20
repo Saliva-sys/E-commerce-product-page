@@ -1,4 +1,4 @@
-import CommerceProduct from "./CommerceProduct.jsx";
+import CommerceProduct from "./CommerceProduct.tsx";
 
 function App() {
   return (
