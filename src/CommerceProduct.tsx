@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import "./CommerceProduct.css";
+import "./CommerceProduct.scss";
 import NavLinks from "./components/NavLinks";
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
