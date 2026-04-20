@@ -8,6 +8,10 @@ import Picture from "./components/Picture";
 import PreviewWindow from "./components/PreviewWindow";
 import ProductInfo from "./components/ProductInfo";
 import ProductPrice from "./components/ProductPrice";
+import Decrement from "./components/Decrement";
+import Increment from "./components/Increment";
+import Quantity from "./components/Quantity";
+import AddCart from "./components/AddCart";
 
 import Logo from "./assets/logo.svg";
 import Close from "./assets/icon-close.svg";
@@ -19,8 +23,8 @@ import Avatar from "./assets/image-avatar.png";
 import CloseLightBox from "./assets/icon-close1.svg";
 import Prev from "./assets/icon-previous.svg";
 import Next from "./assets/icon-next.svg";
-
-
+import Minus from "./assets/icon-minus.svg";
+import Plus from "./assets/icon-plus.svg";
 
 interface ProductImage {
   picture: string; 
@@ -100,87 +104,112 @@ useEffect (() => {
 // ******************************************
 // Vykreslovanie
 return (
-<div className="main__container">
+<>
+{/* Ak products ešte nie sú načítané, ukážeme len načítavanie a nepustíme kód ďalej */}
+  {products.length === 0 ? (
+    <div>Načítavam produkty...</div>
+  ) : (
+  <div className="main__container">
+    <header className="navigation__panel"> 
+      {/* // ========================================== */}
+      {/* navigation panel */} 
+      <NavLinks
+        menu={menu}
+        setMenu={setMenu}
+        Logo={Logo}
+        Close={Close}
+        Menu={MenuIcon}
+        />
+      {/* // ========================================== */}
 
-  
-  <header className="navigation__panel"> 
-    {/* // ========================================== */}
-    {/* navigation panel */} 
-    <NavLinks
-      menu={menu}
-      setMenu={setMenu}
-      Logo={Logo}
-      Close={Close}
-      Menu={MenuIcon}
-      />
-    {/* // ========================================== */}
+      <div className="navigation__panel-cart">
+        <CartWidget
+          Cart={Cart}
+          Basket={Basket}
+          addCart={addCart}
+          setAddCart={setAddCart}
+          setIsCartOpen={setIsCartOpen}
+          isCartOpen={isCartOpen}
+          cartQuantity={cartQuantity}
+          products={products}
+          setQuantity={setQuantity}
+          Swal={Swal}
+        />
 
-    <div className="navigation__panel-cart">
-      <CartWidget
-        Cart={Cart}
-        Basket={Basket}
-        addCart={addCart}
-        setAddCart={setAddCart}
-        setIsCartOpen={setIsCartOpen}
-        isCartOpen={isCartOpen}
-        cartQuantity={cartQuantity}
-        products={products}
-        setQuantity={setQuantity}
-        Swal={Swal}
-       />
+        <Profile
+          Avatar={Avatar}
+        />
+      </div>
+    </header>
 
-      <Profile
-        Avatar={Avatar}
-      />
-    </div>
-  </header>
+    <article className="product__container">
+      {/* // ========================================== */}
+          {/* priestor pre obrazky */}
+          <div className="image__container">
+            <Picture
+              productImages={productImages}
+              setProductImages={setProductImages}
+              images={products[0]?.image || []}
+              setLightBox={setLightBox}
+              handlePrev={handlePrev}
+              Prev={Prev}
+              handleNext={handleNext}
+              Next={Next} />
+          </div>
 
-  <article className="product__container">
-    {/* // ========================================== */}
-        {/* priestor pre obrazky */}
-        <div className="image__container">
-          <Picture
-            productImages={productImages}
-            setProductImages={setProductImages}
-            images={products[0]?.image || []}
+          <PreviewWindow
+            lightBox={lightBox}
             setLightBox={setLightBox}
+            CloseLightBox={CloseLightBox}
             handlePrev={handlePrev}
             Prev={Prev}
             handleNext={handleNext}
-            Next={Next} />
-        </div>
+            Next={Next}
+            productImages={productImages}
+            images={products[0]?.image || []}
+            setProductImages={setProductImages}
+            />
 
-        <PreviewWindow
-          lightBox={lightBox}
-          setLightBox={setLightBox}
-          CloseLightBox={CloseLightBox}
-          handlePrev={handlePrev}
-          Prev={Prev}
-          handleNext={handleNext}
-          Next={Next}
-          productImages={productImages}
-          images={products[0]?.image || []}
-          setProductImages={setProductImages}
-           />
+          <div className="product__info">
+            <div className="product__info-container">
+              <ProductInfo 
+                products={products}/>
 
-        <div className="product__info">
-          <div className="product__info-container">
-            <ProductInfo 
-              products={products}/>
+              <ProductPrice 
+                amount={products} />
+            </div>
 
-            <ProductPrice 
-              amount={products} />
+            <div className="controls__container">
+              <div className="quantity__control">
+                <Decrement
+                  setQuantity={setQuantity}
+                  Minus={Minus} />
+
+                <Quantity 
+                  quantity={quantity}/>
+
+                <Increment
+                  setQuantity={setQuantity}
+                  Plus={Plus} />
+              </div>
+
+              <div className="add__button-container">
+                <AddCart
+                  quantity={quantity}
+                  setAddCart={setAddCart}
+                  setCartQuantity={setCartQuantity}
+                  Cart={Cart}/>
+              </div>
+            </div>
           </div>
-        </div>
-
-  </article>
-  
+    </article>
+  </div>
+  )}
+    
   <footer className="attribution">
     <Footer />
   </footer> 
-  
-  
-</div>
+</>
 );
 };
 

@@ -426,7 +426,7 @@ button {
   width: 22.5rem;
   min-height: clamp(16rem, calc(15.613rem + 1.653vw), 17.1rem);
   border-radius: 0.5rem;
-  z-index: 2;;
+  z-index: 2;
 }
 
 .cart__shadow-layer {
@@ -788,6 +788,7 @@ button {
     right: -10.66rem;
     transform: none;
     top: calc(100% + 1.7rem);
+    z-index: 12;
   }
  
   .btn__container {

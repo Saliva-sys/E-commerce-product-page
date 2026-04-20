@@ -15,12 +15,12 @@ interface CartWidgetProps {
     Cart: string;
     Basket: string;
     addCart: boolean;
-    setAddCart: (value: boolean) => void;
-    setIsCartOpen: (value: boolean) => void;
+    setAddCart: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
     isCartOpen: boolean;
     cartQuantity: number;
     products: Product[];
-    setQuantity: (value: number) => void;
+    setQuantity: React.Dispatch<React.SetStateAction<number>>;
     Swal: any;
 }
 
@@ -30,14 +30,14 @@ return (
 <>
     <div className="panel__cart">
         {/* // _________________________________________ */}
-        {/* vstup do kosika cez ikonku */}
+        {/* Entrance to the cart via the icon */}
         <button type="button"
             className="cart__button"
             aria-label="View cart"
             onClick={() => setIsCartOpen(!isCartOpen)}>
             <img src={Cart} className="cart__button-img" alt="Cart" aria-hidden="true" />
 
-            {/* Ak je množstvo väčšie ako nula, ukáž to, čo je v zátvorke.*/}
+            {/* If the quantity is greater than zero, show what is in parenthesis.*/}
             {addCart && cartQuantity > 0 && ( 
             <span className="cart__quantity-badge">{cartQuantity}</span>
             )}
@@ -46,11 +46,11 @@ return (
     </div>
 
     {/* ///////////////////////////////////////////// */}
-    {/* Definujeme zobrazenie jednotlivych stavov kosika */}
+    {/*We define the display of individual states of the cart */}
     {isCartOpen && (
 
     // ==========================================
-    // Nastavenie kosika         
+    // Setting up a cart        
     <section className="cart__container">
         <div className="cart__shadow-layer"></div>
 
@@ -70,7 +70,7 @@ return (
     ) : (
 
                 // ***********************************************
-                // kosik po vybere produktu 
+                // Cart after picking the product 
                 <div className="product__list">
                     <div className="product__list-item">
                         <img 
