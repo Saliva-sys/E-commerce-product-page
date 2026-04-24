@@ -22,7 +22,7 @@ const Picture:React.FC<PictureProps> = ({productImages, setProductImages, images
 return (
 <>
     {/* // ----------------------------------------- */}
-    {/* hlavny obrazok */}
+    {/* main picture */}
     <div className="main__image"
         onClick={() => window.innerWidth > 768 && setLightBox(true)}>
         <img src={productImages} className="main__image-img" alt="Main product" />
@@ -43,7 +43,7 @@ return (
 
     <div className="thumbnails__container">
         {/* // __________________________________________ */}
-        {/* thumbnails obrazky pod hlavnym obrazkom */}
+        {/* thumbnails images below the main image */}
         {images.map((item, index) => (
             <div
                 key={index}

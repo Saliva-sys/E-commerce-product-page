@@ -1,0 +1,35 @@
+@use "./variables" as v;
+
+.main__container {    
+    &.coming-soon-page {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-inline-start: auto;
+        padding: 0;
+        background-color: v.$light-grayish-blue;
+
+        .main__container-title {
+            font-size: clamp(2rem, 10vw, 5rem); 
+            font-style: italic;
+            font-weight: 700;
+            margin-block-end: 2rem;
+            color: v.$orange;
+        }
+
+        .main__container-link {
+            padding-block-start: 2rem;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: v.$very-dark-blue;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: v.$orange;
+            }
+        }
+    }
+}

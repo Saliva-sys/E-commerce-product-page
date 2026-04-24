@@ -9,7 +9,7 @@ const Quantity: React.FC<QuantityProps> = ({quantity}) => {
 
 return (
     <>
-        {/* Dynamické zobrazenie aktuálneho čísla zo stavu 'quantity' */}
+        {/* Dynamic display of the current number from the 'quantity' status */}
         <span className="quantity">{quantity}</span>
     </>
 );

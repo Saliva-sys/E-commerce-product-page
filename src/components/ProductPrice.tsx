@@ -24,7 +24,7 @@ return (
         <p className="product__price-unit">{p.price > 0 ? p.price : "0.00"}</p>
         <p className="product__price-discount">{p.discount}</p>
         <div className="product__price-original">
-        <p className="product__price-orig">{p.originalPrice}</p>
+            <p className="product__price-orig">{p.originalPrice}</p>
         </div>
     </div>
 </>

@@ -1,0 +1,90 @@
+@use "./variables" as v; 
+
+.menu__list {
+    display: none;
+    position: absolute;
+    flex-direction: column; 
+    z-index: 3;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: v.$black-opacity;
+
+    &.open {
+        display: flex;
+    }
+
+    @media (width >= v.$breakpoint-desktop) {
+        display: flex; 
+        position: static;
+        height: auto;
+        width: auto;
+    }
+
+    .menu__list-content {
+        height: 100vh;
+        width: 15.6rem;
+        padding-block: clamp(0rem, calc(2.028rem - 2.254vw), 1.5rem) 0;
+        padding-inline-start: clamp(1.55rem, calc(0.863rem + 2.93vw), 3.5rem);
+        background-color: v.$white;
+
+        @media (width >= v.$breakpoint-desktop) {
+            height: auto;
+            width: auto;
+        }
+
+        .close__button {
+            @media (width >= v.$breakpoint-desktop) {
+                display: none;
+            }
+
+            .close__button-img {}
+        }
+
+        .menu__list-items {
+            list-style-type: none;  
+            padding-block: clamp(0rem, calc(2.975rem - 3.305vw), 2.2rem) 0;
+
+            @media (width >= v.$breakpoint-desktop) {
+                display: flex;
+                align-items: center;  
+                gap: 1.9rem;
+                height: 100%;
+            }
+
+            .menu__lnk {
+
+                .menu__link {
+                    display: block;
+                    padding-block: clamp(0.78rem, calc(0.034rem + 3.185vw), 2.9rem);
+                    padding-inline: 0 clamp(0rem, calc(-0.07rem + 0.3vw), 0.2rem);
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    letter-spacing: 0.02rem;
+                    text-decoration: none;
+                    color: v.$very-dark-blue;
+                    /* cursor: pointer; */
+                    /* transition: color 0.3s ease; */
+
+                    @media (width >= v.$breakpoint-desktop) {
+                        display: flex;
+                        font-size: 0.95rem;
+                        font-weight: 400; 
+                        letter-spacing: -0.008rem;    
+                        height: auto;
+                        color: v.$dark-grayish-blue;
+                        border-bottom: 0.3rem solid transparent;
+                        transition: border-color 0.3s ease;  
+
+                        &:hover {
+                            color: v.$very-dark-blue;
+                            border-bottom-color: v.$orange;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

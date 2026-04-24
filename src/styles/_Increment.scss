@@ -1,0 +1,17 @@
+@use "./variables" as v; 
+
+.increment__button {
+    background-color: var(--color-light-grayish-blue);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    .increment__button-img {
+        width: 0.8rem;
+        height: auto;
+        pointer-events: none;
+    }
+}

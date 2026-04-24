@@ -5,31 +5,16 @@ import React from "react";
 interface NavLinksProps {
     menu: boolean;
     setMenu: (value: boolean) => void;
-    Logo: string;
-    Menu: string;
     Close: string;
+    onComingSoon: () => void;
 }
 
-const NavLinks: React.FC<NavLinksProps> = ({menu, setMenu, Logo,Menu, Close}) => {
+const NavLinks: React.FC<NavLinksProps> = ({menu, setMenu, Close, onComingSoon}) => {
 
 return (
 <>
     {/* // ---------------------------------------- */}
-    {/* nastavenie vyskakovacieho menu */}
-    <div className="navigation__panel-logo">
-        <button 
-            type="button"
-            className="menu__button"
-            aria-label="Open menu"
-            onClick={() => 
-                setMenu(true)
-            }>
-            <img src={Menu} className="menu__button-img" alt="Menu" aria-hidden="true" />
-        </button>     
-
-        <img src={Logo} className="menu_list-logo" alt="Logo" aria-hidden="true" />
-    </div>
-
+    {/* pop-up menu settings */}
     <nav className={`menu__list ${menu ? 'open' : ''}`}>
         <div className="menu__list-content">
             <button
@@ -41,11 +26,47 @@ return (
             </button>
 
             <ul className="menu__list-items">
-                <li className="menu__lnk"><a href="/coming.html"    className="menu__link">Collections</a></li>
-                <li className="menu__lnk"><a href="/coming.html"    className="menu__link">Men</a></li>
-                <li className="menu__lnk"><a href="/coming.html" className="menu__link">Women</a></li>
-                <li className="menu__lnk"><a href="/coming.html" className="menu__link">About</a></li>
-                <li className="menu__lnk"><a href="/coming.html" className="menu__link">Contact</a></li>
+                <li className="menu__lnk">
+                    <a href="#"    
+                        className="menu__link"
+                        onClick={(e) => {
+                            e.preventDefault(); // Stops page refresh
+                            onComingSoon();     // Starts switching to Coming Soon
+                            setMenu(false);     // Closes the mobile menu if it is open
+                        }}
+                >Collections</a></li>
+                <li className="menu__lnk"><a href="#"    
+                        className="menu__link"
+                        onClick={(e) => {
+                            e.preventDefault(); // Stops page refresh
+                            onComingSoon();     // Starts switching to Coming Soon
+                            setMenu(false);     // Closes the mobile menu if it is open
+                        }}
+                >Men</a></li>
+                <li className="menu__lnk"><a href="#"    
+                        className="menu__link"
+                        onClick={(e) => {
+                            e.preventDefault(); // Stops page refresh
+                            onComingSoon();     // Starts switching to Coming Soon
+                            setMenu(false);     // Closes the mobile menu if it is open
+                        }}
+                >Women</a></li>
+                <li className="menu__lnk"><a href="#"    
+                        className="menu__link"
+                        onClick={(e) => {
+                            e.preventDefault(); // Stops page refresh
+                            onComingSoon();     // Starts switching to Coming Soon
+                            setMenu(false);     // Closes the mobile menu if it is open
+                        }}
+                >About</a></li>
+                <li className="menu__lnk"><a href="#"    
+                        className="menu__link"
+                        onClick={(e) => {
+                            e.preventDefault(); // Stops page refresh
+                            onComingSoon();     // Starts switching to Coming Soon
+                            setMenu(false);     // Closes the mobile menu if it is open
+                        }}
+                >Contact</a></li>
             </ul>
         </div>
     </nav>   

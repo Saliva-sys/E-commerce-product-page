@@ -1,0 +1,41 @@
+@use "./variables" as v;
+
+.product__information {
+
+    .product__info-company {
+        font-size: clamp(0.73rem, calc(0.707rem + 0.103vw), 0.80rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.126rem;
+        color: v.$dark-grayish-blue;
+
+        @media (width >= v.$breakpoint-desktop) {
+            letter-spacing: 0.135rem;
+        }
+    }
+
+    .product__info-name {
+        padding-block-start: clamp(0.75rem, calc(0.592rem + 0.676vw), 1.2rem);
+        font-size: clamp(1.75rem, calc(1.398rem + 1.502vw), 2.75rem);
+        font-weight: 700;
+        line-height: 2rem;
+        letter-spacing: -0.005rem;
+        color: v.$very-dark-blue;
+
+        @media (width >= v.$breakpoint-desktop) {
+            line-height: 3rem;
+        }
+    }
+
+    .product__info-description {
+        padding-block-start: clamp(1.05rem, calc(0.61rem + 1.878vw), 2.3rem);
+        font-size: clamp(0.93rem, calc(0.908rem + 0.102vw), 1.00rem);
+        letter-spacing: 0.005rem;
+        line-height: clamp(1.56rem, calc(1.539rem + 0.09vw), 1.62rem);
+        color: v.$dark-grayish-blue;
+
+        @media (width >= v.$breakpoint-desktop) {
+            letter-spacing: 0rem;
+        }
+    }
+}

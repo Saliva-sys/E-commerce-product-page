@@ -1,0 +1,24 @@
+@use "./variables" as v;
+
+.avatar__button {
+
+    .avatar__button-img {
+        width: clamp(1.5rem, calc(0.919rem + 2.479vw), 3.15rem);
+        height: clamp(1.5rem, calc(0.919rem + 2.479vw), 3.15rem);
+        border-radius: 50%;  
+        outline: 0.05rem solid transparent;
+        transition: outline 0.3s ease;
+
+        &:hover {
+            outline: 0.05rem solid v.$orange;
+        }
+
+        @media (width >= v.$breakpoint-desktop) {
+            outline: 0.15rem solid transparent;
+
+        &:hover {
+            outline: 0.15rem solid v.$orange;
+        }
+        }
+    }
+}

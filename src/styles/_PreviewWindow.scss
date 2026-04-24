@@ -1,0 +1,145 @@
+@use "./variables" as v;
+
+@media (width >= v.$breakpoint-desktop) {
+    .lightbox__overlay {
+        display: flex;
+        position: fixed;
+        justify-content: center;
+        background-color: v.$black-opacity;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+
+        .lightbox__content {
+            display: flex;
+        flex-direction: column;
+        position: relative; 
+
+            .lightbox__close {
+                width: 100%;
+                justify-content: right;
+                padding-block-start: 5.5rem;
+                padding-block-end: 1.35rem;
+
+                .ligthbox__close-img {
+                    width: 1.4rem;
+                    height: 1.45rem;
+
+                    &:hover {
+                        @include v.icon-orange;
+                    }
+                }
+            }
+
+            .main__image-lightbox {
+                display: inline-flex;
+                margin: 0 auto;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+
+                .btn__prev {
+                    &.lightbox-btn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        top: 48%;
+                        transform: translateY(-50%); /* Presné vycentrovanie na stred */
+                        background-color: v.$white;
+                        border-radius: 50%;
+                        width: 3.5rem;        
+                        height: 3.5rem;
+                        z-index: 10;          
+                        pointer-events: auto;
+                        left: -1.75rem;
+
+                        .main__image-prev {
+                            width: 0.7rem;
+                            height: 1.1rem;
+                            object-fit: cover;
+
+                            &:hover {
+                                @include v.icon-orange;
+                            }
+                        }
+                    }   
+                }     
+
+                .lightbox__main-img {
+                    width: 34.4rem;
+                    height: 34.4rem;
+                    border-radius: 1rem;
+                    display: block;
+                }
+
+                .btn__next {
+                    &.lightbox-btn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        top: 48%;
+                        transform: translateY(-50%); /* Presné vycentrovanie na stred */
+                        background-color: v.$white;
+                        border-radius: 50%;
+                        width: 3.5rem;        
+                        height: 3.5rem;
+                        z-index: 10;          
+                        pointer-events: auto;
+                        right: -1.75rem;
+
+                        .main__image-next {
+                            width: 0.7rem;
+                            height: 1.1rem;
+                            object-fit: cover;
+
+                            &:hover {
+                                @include v.icon-orange;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .lightbox__thumbnails {
+                display: flex;
+                gap: 1.94rem;
+                padding-block-start: 2.5rem;
+                padding-inline-start: 3.3rem;
+                padding-inline-end: 1.35rem;
+
+                .lightbox__thumbnail-image {
+                    position: relative;
+                    display: flex;
+                    border-radius: 0.6rem;
+                    overflow: hidden;
+                    width: 5.5rem;  
+                    height: 5.55rem;
+                    background-color: v.$white;
+                    cursor: pointer;
+                    transition: 0.3s ease;
+
+                    &.active-border {
+                        outline: 2px solid v.$orange;
+                    }
+
+                    img {
+
+                        &.thumbnail__lightbox--active {
+                            opacity: 0.3;
+                        }
+
+                        &.thumbnail__lightbox {
+                            &:hover {
+                                opacity: 0.3;
+                            }
+                        }
+                    }
+                }            
+            }
+        }
+    }
+}

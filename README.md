@@ -10,6 +10,7 @@ This is a solution to the [E-commerce product page challenge on Frontend Mentor]
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [The TypeScript & SCSS Evolution](#the-typescript-&-scss-evolution)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
@@ -55,8 +56,31 @@ Users should be able to:
 - CSS BEM 
 - Flexbox & Responsive design (Clamp function)
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- React 18 - Component-based UI library
 - [Vite](https://vitejs.dev/) - Frontend Tooling
+- TypeScript - For strict type safety and better developer experience
+- SCSS - Advanced styling with variables, mixins, and modular structure
+
+### The TypeScript & SCSS Evolution
+
+I recently decided to take this project to a professional level by performing a complete refactor. After completing the initial functional requirements, I performed a deep refactor to align the project with professional industry standards:
+
+**Key improvements included:**
+- **Type Safety:** Migrated the entire codebase from JavaScript to **TypeScript**. This allowed me to define strict interfaces for products, cart props, and component states, making the app much more robust and easier to debug.
+- **Advanced Styling:** Replaced standard CSS with **SCSS**. I implemented a modular structure using `@use` for variables and mixins, and leveraged modern CSS features like `clamp()` for truly fluid typography.
+- **Bridge between SCSS and JS:** I implemented a dynamic way to share theme colors. By using `getComputedStyle` in React, I ensured that components like **SweetAlert2** automatically match the brand colors defined in my SCSS variables.
+
+#### Example of TypeScript Interface:
+```typescript
+interface CartWidgetProps {
+    cartQuantity: number;
+    products: Product[];
+    setQuantity: React.Dispatch<React.SetStateAction<number>>;
+    Swal: any;
+    // ... and more type definitions for total safety
+}
+```
+
 
 ### What I learned
 
@@ -174,6 +198,7 @@ This project was created in cooperation with the AI Assistant (Gemini - Free).
 - Debugging: Together we solved problems with asynchronous data loading data from data.json and handling conditional rendering while data is loading.
 - CSS Layout: Help in tuning more complex media queries and fix positions for cart layers (cart__shadow-layer vs cart__content-layer).
 - Brainstorming: We were looking for the best way to manage the relationship between the main image and the views (thumbnails).
+- During the TypeScript migration, AI acted as a 'senior pair programmer', helping me navigate complex type definitions and ensuring the SCSS-to-JS integration was seamless.
 
 *What worked well?*
 

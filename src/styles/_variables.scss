@@ -12,5 +12,17 @@ $grey-950: hsl(216deg 12% 8%);
 $blue: hsl(228deg 45% 44%);
 $greyish: hsl(229, 27%, 92%);
 $black-strong-opacity: hsla(0deg 0% 0% / 20%);
+$grey-500: hsl(217deg 12% 63%);
+
+:root {
+  --primary-orange: hsl(26deg 100% 55%);
+  --very-dark-blue: hsl(220deg 13% 13%);
+  --pale-orange: hsl(25deg 100% 94%);
+}
+
+@mixin icon-orange {filter: invert(53%) sepia(82%) saturate(3364%) hue-rotate(354deg) brightness(101%) contrast(106%);}
 
 $font-main: 'Kumbh Sans', sans-serif;
+
+$breakpoint-desktop: 64rem;
+

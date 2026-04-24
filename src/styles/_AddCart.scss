@@ -1,0 +1,35 @@
+@use "./variables" as v; 
+
+.add__button {
+    width: 100%;
+    padding-block: 1.15rem 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    gap: clamp(0.9rem, calc(0.865rem + 0.15vw), 1rem);
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: v.$orange;
+    color: v.$grey-950;
+
+    &:disabled {
+        cursor: no-drop;
+        opacity: 0.5;
+    }
+
+    @media (width >= v.$breakpoint-desktop) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .add__button-img {
+        width: 1.1rem;
+        height: auto;
+        overflow: hidden;  
+        pointer-events: none;
+    }
+
+    .add__to-cart {
+        pointer-events: none;
+    }
+}

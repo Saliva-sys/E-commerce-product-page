@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
+
 import "./CommerceProduct.scss";
 import NavLinks from "./components/NavLinks";
+import NavLinksLogo from "./components/NavLinksLogo";
+import NavMenuIcon from "./components/NavMenuIcon";
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
 import CartWidget from "./components/CartWidget";
@@ -12,6 +15,7 @@ import Decrement from "./components/Decrement";
 import Increment from "./components/Increment";
 import Quantity from "./components/Quantity";
 import AddCart from "./components/AddCart";
+import ComingSoon from "./components/ComingSoon";
 
 import Logo from "./assets/logo.svg";
 import Close from "./assets/icon-close.svg";
@@ -63,6 +67,8 @@ const CommerceProduct: React.FC = () => {
 
   const [lightBox, setLightBox] = useState(false); // nastavenie nahladoveho okna
 
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
 
   const handleNext = () => {
   // Nájdeme index aktuálneho obrázka v poli
@@ -105,106 +111,130 @@ useEffect (() => {
 // Vykreslovanie
 return (
 <>
-{/* Ak products ešte nie sú načítané, ukážeme len načítavanie a nepustíme kód ďalej */}
+{/* 1. Condition: If products are not loaded yet, we will only show loading and will not run the code further. */}
   {products.length === 0 ? (
-    <div>Načítavam produkty...</div>
+    <div>Loading products...</div>
   ) : (
-  <div className="main__container">
-    <header className="navigation__panel"> 
-      {/* // ========================================== */}
-      {/* navigation panel */} 
-      <NavLinks
-        menu={menu}
-        setMenu={setMenu}
-        Logo={Logo}
-        Close={Close}
-        Menu={MenuIcon}
-        />
-      {/* // ========================================== */}
 
-      <div className="navigation__panel-cart">
-        <CartWidget
-          Cart={Cart}
-          Basket={Basket}
-          addCart={addCart}
-          setAddCart={setAddCart}
-          setIsCartOpen={setIsCartOpen}
-          isCartOpen={isCartOpen}
-          cartQuantity={cartQuantity}
-          products={products}
-          setQuantity={setQuantity}
-          Swal={Swal}
-        />
+    /* 2. Condition: If you want to display products OR Coming Soon
+ */
+      <>
+        {showComingSoon ? (
+          /* Here you'll see Coming Soon if showComingSoon is true */
+          <ComingSoon 
+            onBack={() => setShowComingSoon(false)} /> 
+        ) : (
 
-        <Profile
-          Avatar={Avatar}
-        />
-      </div>
-    </header>
+        <div className="main__container">
+          <header className="navigation__panel"> 
+            <div className="navigation__panel-logo">
+              {/* // ========================================== */}
+              {/* navigation panel */} 
+              <NavMenuIcon 
+                setMenu={setMenu}
+                Menu={MenuIcon} />
 
-    <article className="product__container">
-      {/* // ========================================== */}
-          {/* priestor pre obrazky */}
-          <div className="image__container">
-            <Picture
-              productImages={productImages}
-              setProductImages={setProductImages}
-              images={products[0]?.image || []}
-              setLightBox={setLightBox}
-              handlePrev={handlePrev}
-              Prev={Prev}
-              handleNext={handleNext}
-              Next={Next} />
-          </div>
+              <NavLinksLogo
+                Logo={Logo}
+              />
+            </div>
 
-          <PreviewWindow
-            lightBox={lightBox}
-            setLightBox={setLightBox}
-            CloseLightBox={CloseLightBox}
-            handlePrev={handlePrev}
-            Prev={Prev}
-            handleNext={handleNext}
-            Next={Next}
-            productImages={productImages}
-            images={products[0]?.image || []}
-            setProductImages={setProductImages}
+            <NavLinks
+              menu={menu}
+              setMenu={setMenu}
+              Close={Close}
+              onComingSoon={() => setShowComingSoon(true)}
             />
+            {/* // ========================================== */}            
 
-          <div className="product__info">
-            <div className="product__info-container">
-              <ProductInfo 
-                products={products}/>
+            <div className="navigation__panel-cart">              
+              <CartWidget
+                Cart={Cart}
+                Basket={Basket}
+                addCart={addCart}
+                setAddCart={setAddCart}
+                setIsCartOpen={setIsCartOpen}
+                isCartOpen={isCartOpen}
+                cartQuantity={cartQuantity}
+                products={products}
+                setQuantity={setQuantity}
+                Swal={Swal}
+              />              
 
-              <ProductPrice 
-                amount={products} />
+              <Profile
+                Avatar={Avatar}
+              />
+            </div>
+          </header>
+
+          <article className="product__container">
+            {/* // ========================================== */}
+            {/* priestor pre obrazky */}
+            <div className="image__container">
+              <Picture
+                productImages={productImages}
+                setProductImages={setProductImages}
+                images={products[0]?.image || []}
+                setLightBox={setLightBox}
+                handlePrev={handlePrev}
+                Prev={Prev}
+                handleNext={handleNext}
+                Next={Next} />
             </div>
 
-            <div className="controls__container">
-              <div className="quantity__control">
-                <Decrement
-                  setQuantity={setQuantity}
-                  Minus={Minus} />
+            <div className="lightBox__container">
+              <PreviewWindow
+                lightBox={lightBox}
+                setLightBox={setLightBox}
+                CloseLightBox={CloseLightBox}
+                handlePrev={handlePrev}
+                Prev={Prev}
+                handleNext={handleNext}
+                Next={Next}
+                productImages={productImages}
+                images={products[0]?.image || []}
+                setProductImages={setProductImages}
+                />
+            </div>
 
-                <Quantity 
-                  quantity={quantity}/>
+            <div className="product__info">
+              <div className="product__info-container">
+                <ProductInfo 
+                  products={products}/>
 
-                <Increment
-                  setQuantity={setQuantity}
-                  Plus={Plus} />
+                <ProductPrice 
+                  amount={products} />
               </div>
 
-              <div className="add__button-container">
-                <AddCart
-                  quantity={quantity}
-                  setAddCart={setAddCart}
-                  setCartQuantity={setCartQuantity}
-                  Cart={Cart}/>
+              <div className="controls__container">
+                <div className="quantity__control">
+                  <Decrement
+                    setQuantity={setQuantity}
+                    Minus={Minus} />
+
+                  <Quantity 
+                    quantity={quantity}/>
+
+                  <Increment
+                    setQuantity={setQuantity}
+                    Plus={Plus} />
+                </div>
+
+                <div className="add__button-container">
+                  <AddCart
+                    quantity={quantity}
+                    setAddCart={setAddCart}
+                    setCartQuantity={setCartQuantity}
+                    Cart={Cart}/>
+                </div>
               </div>
             </div>
-          </div>
-    </article>
-  </div>
+          </article>
+        </div>
+      )}
+    </>
   )}
+    
     
   <footer className="attribution">
     <Footer />

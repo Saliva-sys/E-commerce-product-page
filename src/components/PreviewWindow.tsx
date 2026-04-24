@@ -24,20 +24,20 @@ const PreviewWindow: React.FC<PreviewWindowProps> = ({lightBox, setLightBox, Clo
 
 return (
     <>
-        {/* definovanie nahladoveho okna */}
+        {/* defining a preview window */}
           {lightBox && (
             <div className="lightbox__overlay"
               onClick={(e) => 
                 e.target === e.currentTarget && setLightBox(false)}>            
               <div className="lightbox__content"
                 >
-                {/* Tlačidlo na zatvorenie */}
+                {/* Close button */}
                 <button className="lightbox__close" onClick={() => setLightBox(false)}>
                   <img src={CloseLightBox} className="ligthbox__close-img" alt="Close" aria-hidden="true" />
                 </button>
 
                 <div className="main__image-lightbox">
-                    {/* Šípky v Lightboxe */}
+                    {/* Arrows in Lightbox */}
                     <button className="btn__prev lightbox-btn" onClick={handlePrev}>
                       <img src={Prev} className="main__image-prev" alt="previous" />
                     </button>
@@ -46,11 +46,10 @@ return (
                     
                     <button className="btn__next lightbox-btn" onClick={handleNext}>
                       <img src={Next} className="main__image-next" alt="next" />
-                    </button>
-                  
+                    </button>                  
                 </div>
 
-                {/* Thumbnails pod hlavným obrázkom v Lightboxe */}
+                {/* Thumbnails below the main image in the Lightbox */}
                 <div className="lightbox__thumbnails">
                   {images.map((item, index) => (
                   <div

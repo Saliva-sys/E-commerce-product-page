@@ -1,0 +1,12 @@
+@use "./variables" as v; 
+
+.menu__button {
+    @media (width >= v.$breakpoint-desktop) {
+        display: none;
+    }
+
+    .menu__button-img {
+        width: 1rem;
+        height: 0.9rem;      
+    }
+}
